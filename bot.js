@@ -66,17 +66,6 @@ async function fetchFakeUserData() {
   }
 }
 
-async function getUserLocation() {
-  try {
-    const response = await axios.get('https://apip.cc/json');
-    const data = response.data;
-    const timestamp = getCurrentDateTime();
-    return { ...data, timestamp };
-  } catch (error) {
-    console.error('Error fetching user location:', error.message);
-    return null;
-  }
-}
 
 async function saveData(datas, filePath) {
   let data = [];
@@ -105,15 +94,6 @@ async function readAccounts(filePath) {
   }
 };
 
-async function userInfo() {
-  const { CountryName, RegionName, City, org, query, timestamp } = await getUserLocation();
-  await print('ipuser', 'IP', `${query}|${org}`, '');
-  await print('userTime', 'Time', timestamp, '');
-  await print('region', 'Location', `${City} ${RegionName} ${CountryName}`, '');
-  await print('contacj', 'Contact', '085722669231', '');
-  await print('userInfo', '', '', '');
-  await delay(5)
-}
 
 async function postData(url, data, params, headers) {
   try {
@@ -172,7 +152,7 @@ function createHeaders(userAgent, cookie) {
     },
   ]);
 
-  await userInfo()
+  // await userInfo()
   console.clear()
 
   if(menu === 1){
